@@ -358,24 +358,23 @@ display: none;
 
 
 <p>The task here is to load your Danish Monarchs csv into R using the
-tidyverse toolkit, calculate and explore the kings’ duration of reign
+<code>tidyverse</code> toolkit, calculate and explore the kings’
+duration of reign with pipes <code>%&gt;%</code> in <code>dplyr</code>
 and plot it over time.</p>
 <div id="load-the-kings" class="section level2">
 <h2>Load the kings</h2>
-<p>Make sure to first create an .Rproj workspace with a data/ folder
-where you place either your own dataset or the provided ‘kings’
-dataset.</p>
+<p>Make sure to first create an <code>.Rproj</code> workspace with a
+<code>data/</code> folder where you place either your own dataset or the
+provided <code>kings.csv</code> dataset.</p>
 <ol style="list-style-type: decimal">
-<li>Look at the dataset that are you loading and check what are its
-columns separated by? (hint: open it in plain text editor to see)</li>
+<li>Look at the dataset that are you loading and check what its columns
+are separated by? (hint: open it in plain text editor to see)</li>
 </ol>
-<p>Your answer:</p>
+<p>List what is the</p>
+<p>separator:_______</p>
 <ol start="2" style="list-style-type: decimal">
-<li>Create a <code>kings</code> object with different functions and
-inspect the different outputs. Which of these functions is a
-<code>tidyverse</code> function? What is the <code>class()</code> of the
-‘kings’ object and how many columns does the object have when created
-with these different functions?</li>
+<li>Create a <code>kings</code> object in R with the different functions
+below and inspect the different outputs.</li>
 </ol>
 <ul>
 <li><code>read.csv()</code></li>
@@ -384,53 +383,78 @@ with these different functions?</li>
 <li><code>read_csv2()</code></li>
 </ul>
 <pre class="r"><code># FILL IN THE CODE BELOW and review the outputs
-kings &lt;- read.csv(&quot;data/_______&quot;)
+kings1 &lt;- read.csv(&quot;data/_______&quot;)
 
-kings &lt;- read_csv(&quot;data/_______&quot;)
+kings2 &lt;- read_csv(&quot;data/_______&quot;)
 
-kings &lt;- read.csv2(&quot;data/_______&quot;)
+kings3 &lt;- read.csv2(&quot;data/_______&quot;)
 
-kings &lt;- read_csv2( &quot;data/_______&quot;)</code></pre>
-<p>Which function produced a nice tidy <code>tibble</code> output for
-your dataset? Show the dataset here:</p>
-<pre class="r"><code># YOUR CODE</code></pre>
+kings4 &lt;- read_csv2( &quot;data/_______&quot;)</code></pre>
+<p>Answer: 1. Which of these functions is a <code>tidyverse</code>
+function? Read data with it below into a <code>kings</code> object 2.
+What is the result of running <code>class()</code> on the
+<code>kings</code> object created with a tidyverse function. 3. How many
+columns does the object have when created with these different
+functions? 4. Show the dataset so that we can see how R interprets each
+column</p>
+<pre class="r"><code># COMPLETE THE BLANKS BELOW WITH YOUR CODE, then turn the &#39;eval&#39; flag in this chunk to TRUE.
+
+kings &lt;- _____
+
+class(kings)
+
+
+____(kings)
+
+
+____(kings)</code></pre>
 </div>
 <div id="calculate-the-duration-of-reign-for-all-the-kings-in-your-table" class="section level2">
 <h2>Calculate the duration of reign for all the kings in your table</h2>
-<p>You can calculate the duration of reign in years by subtracting the
-equivalents of your <code>startReign</code> from <code>endReign</code>
-columns and writing the result to a new column called
-<code>duration</code>. But first you need to check a few things:</p>
+<p>You can calculate the duration of reign in years with
+<code>mutate</code> function by subtracting the equivalents of your
+<code>startReign</code> from <code>endReign</code> columns and writing
+the result to a new column called <code>duration</code>. But first you
+need to check a few things:</p>
 <ul>
 <li>Is your data messy? Fix it before re-importing to R</li>
 <li>Do your start and end of reign columns contain NAs? Choose the right
 strategy to deal with them: <code>na.omit()</code>,
 <code>na.rm=TRUE</code>, <code>!is.na()</code></li>
 </ul>
-<p>Calculate the <code>duration</code> column in the kings dataset. You
-can use either the <code>$</code> in kings to access/create columns, or
-utilize the <code>mutate()</code> function from tidyverse. Check with
-your group to brainstorm the options.</p>
+<p>Create a new column called <code>duration</code> in the kings
+dataset, utilizing the <code>mutate()</code> function from tidyverse.
+Check with your group to brainstorm the options.</p>
 <pre class="r"><code># YOUR CODE</code></pre>
 </div>
 <div id="calculate-the-average-duration-of-reign-for-all-rulers" class="section level2">
 <h2>Calculate the average duration of reign for all rulers</h2>
 <p>Do you remember how to calculate an average on a vector object? If
 not, review the last two lessons and remember that a column is basically
-a vector. Next, practice creating tidyverse summaries or subsetting;
-both allow you to work with specific columns and do calculations on
-them.</p>
+a vector. So you need to subset your <code>kings</code> dataset to the
+<code>duration</code> column. If you subset it as a vector you can
+calculate average on it with <code>mean()</code> base-R function. If you
+subset it as a tibble, you can calculate average on it with
+<code>summarize()</code> tidyverse function. Try both ways!</p>
 <ul>
 <li>You first need to know how to select the relevant
-<code>duration</code> column before you run a <code>mean()</code> on
-it.</li>
-<li>Is your <code>duration</code> column a tibble or a vector (=part of
-dataframe)? The <code>mean()</code> function can only be run on a
-vector. The <code>summarize()</code> function works on a tibble.</li>
+<code>duration</code> column. What are your options?</li>
+<li>Is your selected <code>duration</code> column a tibble or a vector?
+The <code>mean()</code> function can only be run on a vector. The
+<code>summarize()</code> function works on a tibble.</li>
 <li>Are you getting an error that there are characters in your column?
 Coerce your data to numbers with <code>as.numeric()</code>.</li>
 <li>Remember to handle NAs: <code>mean(X, na.rm=TRUE)</code></li>
 </ul>
+<pre class="r"><code># YOUR CODE</code></pre>
+</div>
+<div id="how-many-and-which-kings-enjoyed-a-longer-than-average-duration-of-reign" class="section level2">
+<h2>How many and which kings enjoyed a longer-than-average duration of
+reign?</h2>
+<p>You have calculated the average duration above. Use it now to
+<code>filter()</code> the <code>duration</code> column in
+<code>kings</code> dataset. Display the result and also count the
+resulting rows with <code>count()</code></p>
 <pre class="r"><code># YOUR CODE</code></pre>
 </div>
 <div id="how-many-days-did-the-three-longest-ruling-monarchs-rule" class="section level2">
@@ -446,8 +470,8 @@ calculation!</li>
 </ul>
 <pre class="r"><code># YOUR CODE</code></pre>
 </div>
-<div id="plot-the-kings-duration-of-reign-through-time" class="section level2">
-<h2>Plot the kings’ duration of reign through time</h2>
+<div id="challenge-plot-the-kings-duration-of-reign-through-time" class="section level2">
+<h2>Challenge: Plot the kings’ duration of reign through time</h2>
 <p>What is the long-term trend in the duration of reign among Danish
 monarchs? How does it relate to the historical violence trends ?</p>
 <ul>
@@ -455,19 +479,19 @@ monarchs? How does it relate to the historical violence trends ?</p>
 <code>geom_point()</code> and <code>geom_smooth()</code></li>
 <li>In order to peg the duration (which is between 1-99) somewhere to
 the x axis with individual centuries, I recommend creating a new column
-<code>midyear</code> by subtracting the endYear from the startYear and
-dividing the result by two.</li>
+<code>midyear</code> by adding to <code>startYear</code> the product of
+<code>endYear</code> minus the <code>startYear</code> divided by two
+(<code>startYear + (endYear-startYear)/2</code>).</li>
 <li>Now you can plot the kings dataset, plotting <code>midyear</code>
-along the x axis and ‘Duration’ along y axis</li>
+along the x axis and <code>duration</code> along y axis</li>
 <li>BONUS: add a title, nice axis labels to the plot and make the theme
 B&amp;W and font bigger to make it nice and legible!</li>
 </ul>
 <pre class="r"><code># YOUR CODE</code></pre>
-<p>And to submit this rmarkdown, knit it. But first, clean up the code
-chunks, rename the author and change the <code>eval=FALSE</code> flag to
-<code>eval=TRUE</code> so your script generates a nice output. Well
-done!</p>
-<p>Well done!</p>
+<p>And to submit this rmarkdown, knit it into html. But first, clean up
+the code chunks, adjust the date, rename the author and change the
+<code>eval=FALSE</code> flag to <code>eval=TRUE</code> so your script
+actually generates an output. Well done!</p>
 </div>
 
 
